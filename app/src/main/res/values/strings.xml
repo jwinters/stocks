@@ -1,0 +1,16 @@
+<resources>
+	<string name="app_name">Stocks</string>
+
+	<string name="title_stock_list">Stocks</string>
+	<string name="title_stock_add">Add Stock</string>
+
+	<string name="menu_reload">Reload</string>
+	<string name="menu_add">Add</string>
+
+	<string name="button_ok">OK</string>
+	<string name="button_cancel">Cancel</string>
+	<string name="button_add_account">Add Account</string>
+
+	<string name="message_confirm_delete">Would you like to remove this stock?</string>
+	<string name="message_no_results_found">No Results Found</string>
+</resources>

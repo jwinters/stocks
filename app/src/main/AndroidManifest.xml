@@ -1,0 +1,68 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="io.elapse.stocks" >
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+	<uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+	<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+	<application
+		android:allowBackup="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:theme="@style/StocksTheme" >
+
+		<activity android:name=".activities.LauncherActivity" 
+			android:theme="@style/StocksTheme.Fullscreen"
+			android:noHistory="true">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<activity android:name=".activities.LoginActivity"
+			android:theme="@style/StocksTheme.Fullscreen"
+			android:noHistory="true" />
+
+		<activity android:name=".activities.StockListActivity" />
+		<activity android:name=".activities.StockItemActivity" />
+
+		<activity android:name=".activities.StockDeleteActivity"
+			android:theme="@style/StocksTheme.Dialog"/>
+
+		<activity android:name=".activities.StockAddActivity"
+			android:windowSoftInputMode="adjustResize|stateHidden"
+			android:theme="@style/StocksTheme.Dialog"/>
+
+		<service android:name=".application.StocksAuthenticatorService" 
+			android:permission="android.permission.ACCOUNT_MANAGER" >
+			<intent-filter>
+				<action android:name="android.accounts.AccountAuthenticator" />
+			</intent-filter>
+			<meta-data 
+				android:name="android.accounts.AccountAuthenticator" 
+				android:resource="@xml/authenticator" />
+		</service>
+
+		<service android:name=".application.StocksSyncAdapterService" 
+			android:exported="false">
+			<intent-filter>
+				<action android:name="android.content.SyncAdapter" />
+			</intent-filter>
+			<meta-data 
+				android:name="android.content.SyncAdapter" 
+				android:resource="@xml/syncadapter" />
+		</service>
+		
+		<service android:name="io.pivotal.arca.service.OperationService" 
+			android:exported="false" />
+
+		<provider android:name=".application.StocksContentProvider" 
+			android:authorities="io.elapse.stocks.application.StocksContentProvider" 
+			android:exported="false" />
+
+	</application>
+
+</manifest>

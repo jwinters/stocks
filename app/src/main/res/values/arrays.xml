@@ -1,0 +1,8 @@
+<resources>
+
+    <array name="items">
+        <item>YES</item>
+        <item>CANCEL</item>
+    </array>
+
+</resources>

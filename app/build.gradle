@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "io.elapse.stocks"
+        minSdkVersion 14
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.4'
+    compile('io.pivotal:arca:1.0-beta.5-SNAPSHOT') {
+        exclude group: 'com.android.support'
+    }
+}

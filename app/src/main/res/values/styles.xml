@@ -1,0 +1,13 @@
+<resources>
+
+	<style name="StocksTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+	</style>
+
+	<style name="StocksTheme.Fullscreen" parent="Theme.AppCompat.Light.NoActionBar">
+	</style>
+
+	<style name="StocksTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+		<item name="android:windowNoTitle">true</item>
+	</style>
+
+</resources>
