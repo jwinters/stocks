@@ -29,18 +29,27 @@ public class StockListViewBinder implements ViewBinder {
 	private boolean setStockDifferenceValue(final TextView view, final Cursor cursor, final Binding binding) {
 		final String string = cursor.getString(binding.getColumnIndex());
 		setTextColor(view, string);
-		view.setText(string);
+		view.setText(formatText(string));
 		return true;
 	}
 
 	private boolean setStockPercentageValue(final TextView view, final Cursor cursor, final Binding binding) {
 		final String string = cursor.getString(binding.getColumnIndex());
 		setTextColor(view, string);
-		view.setText("(" + string + "%)");
+		view.setText("(" + (formatText(string)) + "%)");
 		return true;
 	}
 
 	private void setTextColor(final TextView view, final String value) {
-		view.setTextColor(Float.parseFloat(value) > 0 ? GREEN : RED);
+		try {
+			final boolean negative = Float.parseFloat(value) < 0;
+			view.setTextColor(negative ? RED : GREEN);
+		} catch (final NumberFormatException e) {
+			view.setTextColor(Color.BLACK);
+		}
+	}
+
+	private String formatText(final String string) {
+		return string.isEmpty() ? "0.00" : string;
 	}
 }

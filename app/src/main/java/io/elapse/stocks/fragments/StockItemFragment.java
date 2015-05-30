@@ -7,6 +7,7 @@ import io.elapse.stocks.R;
 import io.elapse.stocks.application.StocksContentProvider.StockTable;
 import io.elapse.stocks.binders.StockListViewBinder;
 import io.elapse.stocks.models.StocksQuery;
+import io.elapse.stocks.monitors.StockItemMonitor;
 import io.pivotal.arca.adapters.Binding;
 import io.pivotal.arca.fragments.ArcaFragment;
 import io.pivotal.arca.fragments.ArcaFragmentBindings;
@@ -14,7 +15,8 @@ import io.pivotal.arca.fragments.ArcaSimpleItemFragment;
 
 @ArcaFragment(
         fragmentLayout = R.layout.fragment_stock_item,
-        binder = StockListViewBinder.class
+        binder = StockListViewBinder.class,
+        monitor = StockItemMonitor.class
 )
 public class StockItemFragment extends ArcaSimpleItemFragment {
 

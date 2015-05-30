@@ -1,12 +1,9 @@
 package io.elapse.stocks.application;
 
-import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.net.Uri;
 
 import io.elapse.stocks.models.Stock;
-import io.elapse.stocks.utils.ProxyDataset;
-import io.elapse.stocks.utils.ContentUtils;
+import io.elapse.stocks.utils.HttpDataset;
 import io.pivotal.arca.provider.Column;
 import io.pivotal.arca.provider.DatabaseProvider;
 import io.pivotal.arca.provider.SQLiteTable;
@@ -15,7 +12,6 @@ import io.pivotal.arca.provider.Select;
 import io.pivotal.arca.provider.SelectFrom;
 import io.pivotal.arca.provider.Unique;
 import io.pivotal.arca.provider.Unique.OnConflict;
-import io.pivotal.arca.utils.Logger;
 
 public class StocksContentProvider extends DatabaseProvider {
 
@@ -39,7 +35,7 @@ public class StocksContentProvider extends DatabaseProvider {
 	public boolean onCreate() {
 		registerDataset(AUTHORITY, Paths.STOCKS, StockTable.class);
 		registerDataset(AUTHORITY, Paths.SYMBOLS, SymbolView.class);
-		registerDataset(AUTHORITY, Paths.SEARCH, SearchProxy.class);
+		registerDataset(AUTHORITY, Paths.SEARCH, StockSearch.class);
 		return true;
 	}
 
@@ -63,23 +59,18 @@ public class StocksContentProvider extends DatabaseProvider {
 	}
 
 	public static class SymbolView extends SQLiteView {
+
 		@SelectFrom("StockTable as s")
 		public interface Columns {
 			@Select("GROUP_CONCAT(s.e || ':' || s.t)") String SYMBOLS = "symbols";
 		}
 	}
 
-	public static class SearchProxy extends ProxyDataset {
+	public static class StockSearch extends HttpDataset<Stock> {
 
 		@Override
-		public Cursor query(final Uri uri, final String[] projection, final String selection, final String[] selectionArgs, final String sortOrder) {
-			try {
-				final Stock.List list = StocksApi.getStockList(selectionArgs[0]);
-				return ContentUtils.getCursor(list);
-			} catch (final Exception e) {
-				Logger.ex(e);
-				return new MatrixCursor(new String[] { "_id" });
-			}
+		protected Stock.List query(final String query) throws Exception {
+			return StocksApi.getStockList(query);
 		}
 	}
 }
