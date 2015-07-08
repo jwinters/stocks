@@ -8,6 +8,7 @@
 	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 
 	<application
+		android:name=".application.StocksApplication"
 		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
@@ -24,16 +25,20 @@
 
 		<activity android:name=".activities.LoginActivity"
 			android:theme="@style/StocksTheme.Fullscreen"
+			android:launchMode="singleTask"
 			android:noHistory="true" />
 
-		<activity android:name=".activities.StockListActivity" />
-		<activity android:name=".activities.StockItemActivity" />
+		<activity android:name=".activities.StockListActivity"
+			android:launchMode="singleTask" />
+
+		<activity android:name=".activities.StockItemActivity"
+			android:launchMode="singleTask" />
 
 		<activity android:name=".activities.StockDeleteActivity"
 			android:theme="@style/StocksTheme.Dialog"/>
 
 		<activity android:name=".activities.StockAddActivity"
-			android:windowSoftInputMode="adjustResize|stateHidden"
+			android:windowSoftInputMode="adjustResize|stateAlwaysVisible"
 			android:theme="@style/StocksTheme.Dialog"/>
 
 		<service android:name=".application.StocksAuthenticatorService" 

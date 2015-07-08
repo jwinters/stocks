@@ -37,6 +37,13 @@ public class StockListFragment extends ArcaSimpleAdapterFragment {
     );
 
     @Override
+    public void onViewCreated(final View view, final Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        execute(new StocksQuery());
+    }
+
+    @Override
     public void onItemClick(final AdapterView<?> adapterView, final View view, final int position, final long id) {
         final Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
         final String itemId = cursor.getString(cursor.getColumnIndex(StockTable.Columns.ID));
@@ -51,12 +58,5 @@ public class StockListFragment extends ArcaSimpleAdapterFragment {
 
         StockDeleteActivity.newInstance(getActivity(), itemId);
         return true;
-    }
-
-    @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        execute(new StocksQuery());
     }
 }

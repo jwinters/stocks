@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:layout_weight="0.25"
+    android:background="@drawable/background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/stock_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:textColor="#777"
+        android:textStyle="bold"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/stock_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:gravity="center|end"
+        android:textColor="#777"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/stock_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:gravity="center"
+        android:textColor="#777"
+        android:textSize="12sp"
+        android:typeface="serif"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/stock_cp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:gravity="center"
+        android:textColor="#777"
+        android:textSize="12sp"
+        android:typeface="serif" />
+
+</LinearLayout>

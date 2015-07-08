@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.ViewGroup;
 
 import io.elapse.stocks.R;
 
@@ -23,8 +24,8 @@ public class StockAddActivity extends ActionBarActivity {
 		final DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-		final int pixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, metrics);
-		getWindow().setLayout(metrics.widthPixels - pixels, metrics.heightPixels - pixels);
+		final int pixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, metrics);
+		getWindow().setLayout(metrics.widthPixels - pixels, ViewGroup.LayoutParams.MATCH_PARENT);
 
 		setContentView(R.layout.activity_stock_add);
 	}

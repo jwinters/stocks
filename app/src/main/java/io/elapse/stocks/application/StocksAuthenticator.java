@@ -16,7 +16,7 @@ public class StocksAuthenticator extends AbstractAccountAuthenticator {
 
 	public static final String ACCOUNT_NAME = "Stocks";
 	public static final String ACCOUNT_TYPE = "io.elapse.stocks.account";
-	public static final String AUTH_TOKEN_TYPE = "io.elapse.stocks.token";
+	public static final String TOKEN_TYPE = "io.elapse.stocks.token";
 
 	private final Context mContext;
 

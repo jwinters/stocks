@@ -31,7 +31,6 @@ public class StocksSyncAdapter extends AbstractThreadedSyncAdapter {
 		final RequestExecutor executor = new RequestExecutor.DefaultRequestExecutor(contentResolver);
 
 		final QueryResult result = executor.execute(new SymbolsQuery());
-
 		final Cursor cursor = result.getResult();
 
 		Log.v("debug", "Syncing - Getting symbols");
@@ -40,14 +39,15 @@ public class StocksSyncAdapter extends AbstractThreadedSyncAdapter {
 			final String columnName = StocksContentProvider.SymbolView.Columns.SYMBOLS;
 			final String symbols = cursor.getString(cursor.getColumnIndex(columnName));
 
-			Log.v("debug", "Syncing - Found symbols : " + symbols);
+			if (symbols != null) {
+				Log.v("debug", "Syncing - Found symbols : " + symbols);
 
-			OperationService.start(getContext(), new GetStockListOperation(symbols));
+				OperationService.start(getContext(), new GetStockListOperation(symbols));
+			}
 		}
 
 		Log.v("debug", "Syncing - Finished");
 
 		result.close();
 	}
-
 }

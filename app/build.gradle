@@ -21,7 +21,11 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.4'
-    compile('io.pivotal:arca:1.0-beta.5-SNAPSHOT') {
+
+    compile 'io.pivotal:arca-service:1.0-beta.5-SNAPSHOT'
+    compile 'io.pivotal:arca-provider:1.0-beta.5-SNAPSHOT'
+
+    compile('io.pivotal:arca-fragments:1.0-beta.5-SNAPSHOT') {
         exclude group: 'com.android.support'
     }
 }

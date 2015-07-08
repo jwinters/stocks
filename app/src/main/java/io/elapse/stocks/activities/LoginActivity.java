@@ -66,7 +66,7 @@ public class LoginActivity extends Activity {
 	}
 
 	private void setupAccount(final Account account) {
-		final String tokenType = StocksAuthenticator.AUTH_TOKEN_TYPE;
+		final String tokenType = StocksAuthenticator.TOKEN_TYPE;
 		final String authToken = UUID.randomUUID().toString();
 
 		final AccountManager manager = AccountManager.get(this);
