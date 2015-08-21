@@ -8,5 +8,6 @@ public class StocksApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        StocksNotificationService.start(this);
     }
 }

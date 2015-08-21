@@ -3,7 +3,6 @@ package io.elapse.stocks.utils;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -43,9 +42,7 @@ public class ContentUtils {
         if (columnType != null) {
 
             final String columnName = (String) field.get(null);
-            Log.v("test", "columnName: " + columnName);
             final int columnIndex = cursor.getColumnIndex(columnName);
-            Log.v("test", "columnIndex: " + columnIndex);
 
             if (columnType.value() == Column.Type.TEXT) {
                 values.put(columnName, cursor.getString(columnIndex));

@@ -1,7 +1,5 @@
 package io.elapse.stocks.application;
 
-import android.util.Log;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -18,7 +16,7 @@ public class StocksApi {
 
 	public static Stock.List getStockList(final String query) throws IOException {
 		final URL url = new URL(BASE_URL + query);
-		Log.v("Network", "Request : " + url);
+		Logger.v("Request : " + url);
 		final String result = loadContent(url).substring(3);
 		final ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.readValue(result, Stock.List.class);
