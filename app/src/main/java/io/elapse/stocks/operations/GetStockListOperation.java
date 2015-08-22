@@ -7,6 +7,7 @@ import android.os.Parcelable;
 
 import io.elapse.stocks.application.StocksApi;
 import io.elapse.stocks.application.StocksContentProvider;
+import io.elapse.stocks.application.StocksPreferences;
 import io.elapse.stocks.models.Stock;
 import io.pivotal.arca.dispatcher.ErrorBroadcaster;
 import io.pivotal.arca.provider.DataUtils;
@@ -44,6 +45,10 @@ public class GetStockListOperation extends SimpleOperation {
         if (results.hasFailedTasks()) {
             final ServiceError error = results.getFailedTasks().get(0).getError();
             ErrorBroadcaster.broadcast(context, getUri(), error.getCode(), error.getMessage());
+
+        } else {
+            final long currentTime = System.currentTimeMillis();
+            StocksPreferences.setLastUpdated(context, currentTime);
         }
     }
 

@@ -1,19 +1,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="0dp"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="2dp"
     android:layout_weight="0.25"
-    android:background="@drawable/background"
+    android:background="@drawable/background_dark"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="4dp">
 
     <TextView
         android:id="@+id/stock_t"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        android:textColor="#777"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="#fff"
         android:textStyle="bold"
         android:textSize="12sp" />
 
@@ -22,6 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:gravity="center|end"
         android:textColor="#777"
         android:textSize="12sp"
@@ -34,6 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:gravity="center"
         android:textColor="#777"
         android:textSize="12sp"
@@ -45,8 +51,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:gravity="center"
-        android:textColor="#777"
+        android:textColor="#fff"
         android:textSize="12sp"
         android:typeface="serif" />
 
