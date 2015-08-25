@@ -45,8 +45,8 @@ public class StockListActivity extends ActionBarActivity {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
+	protected void onResume() {
+		super.onResume();
 
 		final Uri uri = StocksContentProvider.Uris.STOCKS;
 		getContentResolver().registerContentObserver(uri, false, mObserver);

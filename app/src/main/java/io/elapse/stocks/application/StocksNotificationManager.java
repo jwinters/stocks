@@ -22,6 +22,12 @@ public class StocksNotificationManager {
         notificationManager.notify(0, createNotification(context, cursor));
     }
 
+    public void hideNotification(final Context context) {
+        final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.cancelAll();
+    }
+
     private Notification createNotification(final Context context, final Cursor cursor) {
         final RemoteViews remoteViews = createRemoteViews(context, cursor);
 
