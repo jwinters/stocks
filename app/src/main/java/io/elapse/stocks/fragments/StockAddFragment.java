@@ -17,18 +17,18 @@ import io.elapse.stocks.application.StocksContentProvider.StockTable;
 import io.elapse.stocks.models.SearchQuery;
 import io.elapse.stocks.models.StocksInsert;
 import io.elapse.stocks.monitors.StockAddMonitor;
-import io.elapse.stocks.utils.ContentUtils;
 import io.pivotal.arca.adapters.Binding;
 import io.pivotal.arca.fragments.ArcaFragment;
 import io.pivotal.arca.fragments.ArcaFragmentBindings;
-import io.pivotal.arca.fragments.ArcaSimpleAdapterFragment;
+import io.pivotal.arca.fragments.ArcaSimpleAdapterSupportFragment;
+import io.pivotal.arca.provider.DataUtils;
 
 @ArcaFragment(
         fragmentLayout = R.layout.fragment_stock_add,
         adapterItemLayout = R.layout.list_item_stock,
         monitor = StockAddMonitor.class
 )
-public class StockAddFragment extends ArcaSimpleAdapterFragment implements TextWatcher {
+public class StockAddFragment extends ArcaSimpleAdapterSupportFragment implements TextWatcher {
 
     @ArcaFragmentBindings
     private static final Collection<Binding> BINDINGS = Arrays.asList(
@@ -41,7 +41,7 @@ public class StockAddFragment extends ArcaSimpleAdapterFragment implements TextW
     @Override
     public void onItemClick(final AdapterView<?> adapterView, final View view, final int position, final long id) {
         final Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
-        final ContentValues values = ContentUtils.getContentValues(cursor, StockTable.class, 0);
+        final ContentValues values = DataUtils.getContentValues(cursor, StockTable.class, position);
         values.remove(StockTable.Columns._ID);
 
         getRequestDispatcher().execute(new StocksInsert(values));

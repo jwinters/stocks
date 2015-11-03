@@ -3,14 +3,14 @@ package io.elapse.stocks.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.ViewGroup;
 
 import io.elapse.stocks.R;
 
-public class StockAddActivity extends ActionBarActivity {
+public class StockAddActivity extends FragmentActivity {
 
 	public static void newInstance(final Context context) {
 		final Intent intent = new Intent(context, StockAddActivity.class);
@@ -28,5 +28,6 @@ public class StockAddActivity extends ActionBarActivity {
 		getWindow().setLayout(metrics.widthPixels - pixels, ViewGroup.LayoutParams.MATCH_PARENT);
 
 		setContentView(R.layout.activity_stock_add);
+		setTitle("Add Stock");
 	}
 }

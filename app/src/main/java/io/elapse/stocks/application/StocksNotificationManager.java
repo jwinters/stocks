@@ -3,6 +3,7 @@ package io.elapse.stocks.application;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,25 +11,67 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.DateTimeZone;
+
 import io.elapse.stocks.R;
 import io.elapse.stocks.activities.StockListActivity;
 import io.elapse.stocks.application.StocksContentProvider.StockTable;
+import io.elapse.stocks.models.StocksQuery;
+import io.pivotal.arca.dispatcher.QueryResult;
+import io.pivotal.arca.monitor.ArcaExecutor;
 
 public class StocksNotificationManager {
 
-    public void showNotification(final Context context, final Cursor cursor) {
-        final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    private static final int NOTIFICATION_ID = 0;
 
-        notificationManager.notify(0, createNotification(context, cursor));
+    private static final int START_TIME_24_HRS = 9;
+    private static final int FINISH_TIME_24_HRS = 17;
+
+
+    public void handleNotificationEvent(final Context context) {
+        if (shouldShowNotification()) {
+            showNotification(context);
+        } else {
+            hideNotification(context);
+        }
     }
 
-    public void hideNotification(final Context context) {
-        final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.cancelAll();
+    private boolean shouldShowNotification() {
+        final DateTimeZone zone = DateTimeZone.getDefault();
+        final DateTime now = DateTime.now(zone);
+        final int hour = now.getHourOfDay();
+        final int day = now.getDayOfWeek();
+        final boolean isWeekday = day !=  DateTimeConstants.SATURDAY && day != DateTimeConstants.SUNDAY;
+        final boolean isWorkingHours = hour >= START_TIME_24_HRS && hour <= FINISH_TIME_24_HRS;
+        return isWeekday && isWorkingHours;
     }
 
-    private Notification createNotification(final Context context, final Cursor cursor) {
+    private void showNotification(final Context context) {
+        final ContentResolver resolver = context.getContentResolver();
+        final ArcaExecutor executor = new ArcaExecutor.DefaultArcaExecutor(resolver, context);
+        final QueryResult result = executor.execute(new StocksQuery());
+
+        showNotification(context, result.getData());
+
+        result.close();
+    }
+
+    private void showNotification(final Context context, final Cursor cursor) {
+        final NotificationManager service = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        final Notification notification = createNotification(context, cursor);
+
+        service.notify(NOTIFICATION_ID, notification);
+    }
+
+    private void hideNotification(final Context context) {
+        final NotificationManager service = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        service.cancel(NOTIFICATION_ID);
+    }
+
+    public Notification createNotification(final Context context, final Cursor cursor) {
         final RemoteViews remoteViews = createRemoteViews(context, cursor);
 
         final Intent intent = new Intent(context, StockListActivity.class);

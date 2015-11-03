@@ -39,7 +39,7 @@ public abstract class HttpDataset<T> implements Dataset {
     public Cursor query(final Uri uri, final String[] projection, final String selection, final String[] selectionArgs, final String sortOrder) {
         try {
             final List<T> list = query(selectionArgs[0]);
-            return ContentUtils.getCursor(list);
+            return DataUtils.getCursor(list);
         } catch (final Exception e) {
             Logger.ex(e);
             return new MatrixCursor(new String[] { "_id" });
